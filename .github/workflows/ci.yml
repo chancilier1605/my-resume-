@@ -30,10 +30,11 @@ jobs:
     steps: 
       - name: SSH to Server
         uses: appleboy/ssh-action@v1.0.3
-        with: 3.95.156.236
-        username: ec2-user
-        key: ${{secrets.KEY}}
-        script: |
+        with: 
+          host: 3.95.156.236
+          username: ec2-user
+          key: ${{secrets.KEY}}
+          script: |
             docker stop resume || echo ""
             docker rm resume || echo ""
             docker run -d --name resume -p 8080:5001 ${{secrets.REGISTRY_USERNAME}}/my-image-name:${{github.run_number}}
