@@ -72,8 +72,7 @@ jobs:
         run: |
           IMAGE_URI="${{ steps.ecr-login.outputs.registry }}/${{ env.ECR_REPO_NAME}}:${{ env.IMAGE_TAG }}"
           echo "image-uri=$IMAGE_URI" >> $GITHUB_OUTPUT
-
-      - name: Post Fix Suggestions on PR
+           - name: Post Fix Suggestions on PR
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
         with:
@@ -109,7 +108,7 @@ jobs:
               });
             } catch (error) {
               core.error('Failed to process Trivy results: ' + error.message);
-            }
+            }          
   Deploy:
     runs-on: ubuntu-latest
     needs: Build  # Depends on Build job
